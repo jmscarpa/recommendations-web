@@ -1,0 +1,12 @@
+.recommendation {
+  padding: 1em;
+  border: solid 1px #ccc;
+  margin-bottom: 1em;
+  border-radius: 8px;
+}
+
+span.badge {
+  padding: 8px;
+  color: #000;
+  background-color: #bada55;
+}

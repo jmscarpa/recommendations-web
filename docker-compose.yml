@@ -1,0 +1,13 @@
+version: "3.1"
+
+services:
+  app:
+    image: embraslabs/node:12.20-angular-cli-11.0.6
+    container_name: school-management-web
+    command: "yarn start"
+    stdin_open: true
+    tty: true
+    ports:
+      - 4200:4200
+    volumes:
+      - .:/app:delegated

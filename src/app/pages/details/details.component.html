@@ -1,0 +1,16 @@
+<a [routerLink]="['']">Voltar</a>
+
+<strong class="d-block" *ngIf="loading">Carregando...</strong>
+
+<div *ngIf="!loading && recommendation">
+  <h1 class="my-3">{{recommendation.title}}</h1>
+  <div class="row">
+    <div class="col-2">
+      <img src="{{recommendation.imageUrl}}" class="card-img-top square" alt="...">
+    </div>
+    <div class="col-8">
+      <div class="badge rounded-pill text-bg-primary mb-2">{{recommendation.kind}}</div>
+      <p class="card-text">{{recommendation.description }}</p>
+    </div>
+  </div>
+</div>

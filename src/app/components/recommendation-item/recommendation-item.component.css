@@ -1,12 +1,7 @@
-.recommendation {
-  padding: 1em;
-  border: solid 1px #ccc;
-  margin-bottom: 1em;
-  border-radius: 8px;
+.card {
+  height: 100%;
 }
-
-span.badge {
-  padding: 8px;
-  color: #000;
-  background-color: #bada55;
+img.square {
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }

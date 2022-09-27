@@ -5,10 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HomeComponent } from './pages/home/home.component';
+import { DetailsComponent } from './pages/details/details.component';
+
 import { RecommendationItemComponent } from './components/recommendation-item/recommendation-item.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, RecommendationItemComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    DetailsComponent,
+    RecommendationItemComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

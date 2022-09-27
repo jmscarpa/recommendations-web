@@ -1,4 +1,8 @@
-<div class="recommendation">
-  <h4>{{recommendation.title}}</h4>
-  <span class="badge">{{recommendation.kind}}</span>
+<div class="card" [routerLink]="[recommendation.id,'detalhes']">
+  <img src="{{recommendation.imageUrl}}" class="card-img-top square" alt="...">
+  <div class="card-body">
+    <div class="badge rounded-pill text-bg-primary mb-2">{{recommendation.kind}}</div>
+    <h5 class="card-title">{{recommendation.title}}</h5>
+    <p class="card-text">{{recommendation.description }}</p>
+  </div>
 </div>

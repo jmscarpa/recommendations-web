@@ -1,4 +1,15 @@
 <h1>Recomendações</h1>
 <hr>
 
-<app-recommendation-item [recommendation]='item' *ngFor="let item of recommendations"></app-recommendation-item>
+<div class="btn-group w-100 mb-4" role="group">
+  <button (click)="filter('all')" class="btn btn-outline-primary" [class.active]="currentKind == 'all'">Todos</button>
+
+  <button (click)="filter(kind)" class="btn btn-outline-primary" [class.active]="currentKind == kind"
+    *ngFor="let kind of kinds">{{kind}}</button>
+</div>
+
+<div class="row d-flex align-items-stretch">
+  <div class="col-3 mb-4" *ngFor="let item of recommendations">
+    <app-recommendation-item [recommendation]='item'></app-recommendation-item>
+  </div>
+</div>

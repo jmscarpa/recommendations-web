@@ -3,4 +3,5 @@ export interface RecommendationModel {
   title: string;
   kind: string;
   description: string;
+  imageUrl: string;
 }

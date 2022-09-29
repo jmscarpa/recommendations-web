@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +7,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   
-  constructor(private router: Router){}
+  constructor(private authService: AuthService){}
 
   public login(): void {
-    localStorage.setItem('email', 'joao.scarpa@gmail.com')
-    this.router.navigateByUrl('')
+    this.authService.login('joao.scarpa@gmail.com')
   }
 
 }

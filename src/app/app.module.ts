@@ -8,6 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { DetailsComponent } from './pages/details/details.component';
 
 import { RecommendationItemComponent } from './components/recommendation-item/recommendation-item.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { RecommendationItemComponent } from './components/recommendation-item/re
     HomeComponent,
     DetailsComponent,
     RecommendationItemComponent,
+    LoginComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

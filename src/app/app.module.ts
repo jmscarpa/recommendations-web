@@ -9,6 +9,7 @@ import { DetailsComponent } from './pages/details/details.component';
 
 import { RecommendationItemComponent } from './components/recommendation-item/recommendation-item.component';
 import { LoginComponent } from './pages/login/login.component';
+import { LayoutComponent } from './pages/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LoginComponent } from './pages/login/login.component';
     HomeComponent,
     DetailsComponent,
     RecommendationItemComponent,
-    LoginComponent
+    LoginComponent,
+    LayoutComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

@@ -14,9 +14,4 @@ export class LoginComponent {
     this.router.navigateByUrl('')
   }
 
-  public logout(): void {
-    localStorage.clear()
-    this.router.navigateByUrl('login')
-  }
-
 }

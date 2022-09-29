@@ -6,11 +6,15 @@ import { DetailsComponent } from './pages/details/details.component';
 import { LoginComponent } from './pages/login/login.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { LayoutComponent } from 'src/app/pages/layout/layout.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', component: HomeComponent, canActivate: [ AuthGuard ] },
-  { path: ':id/detalhes', component: DetailsComponent, canActivate: [ AuthGuard ] },
+  { path: '', component: LayoutComponent, canActivate: [ AuthGuard ], children: [
+    { path: '', component: HomeComponent },
+    { path: ':id/detalhes', component: DetailsComponent }
+  ]},
 ];
 
 @NgModule({

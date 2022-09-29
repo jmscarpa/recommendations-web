@@ -1,4 +1,16 @@
-<h1>Login</h1>
-<a [routerLink]="['']">Ir para Home</a>
-<hr>
-<button (click)="login()" class="btn btn-success">Fazer Login</button>
+<div class="container min-vh-100">
+  <div class="d-flex align-itens-center justify-content-center">
+    <div class="card">
+      <div class="card-body">
+        <h1>Login</h1>
+
+        <div class="form-group">
+          <input type="email" [(ngModel)]="email" class="form-control" placeholder="Digite seu e-mail">
+        </div>
+
+        <hr>
+        <button (click)="login()" class="btn btn-success">Fazer Login</button>
+      </div>
+    </div>
+  </div>
+</div>

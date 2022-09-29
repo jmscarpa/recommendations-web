@@ -9,7 +9,11 @@ export class AuthService {
   constructor(private router: Router){}
 
   public isLoggedIn(): boolean {
-    return !!localStorage.email
+    return !!localStorage.email;
+  }
+
+  public get currentUser(): string {
+    return localStorage.email;
   }
 
   public login(email: string): void {

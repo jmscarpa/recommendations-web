@@ -6,11 +6,12 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  
   constructor(private authService: AuthService){}
 
+  public email: string = '';
+
   public login(): void {
-    this.authService.login('joao.scarpa@gmail.com')
+    this.authService.login(this.email)
   }
 
 }

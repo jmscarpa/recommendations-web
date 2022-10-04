@@ -1,7 +1,9 @@
+import { CategoryModel } from './category.model';
+
 export interface RecommendationModel {
   id: number;
-  title: string;
-  kind: string;
+  name: string;
   description: string;
-  imageUrl: string;
+  image_url: string;
+  category: CategoryModel;
 }

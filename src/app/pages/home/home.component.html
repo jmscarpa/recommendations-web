@@ -11,8 +11,8 @@
 <div class="btn-group w-100 mb-4" role="group">
   <button (click)="filter('all')" class="btn btn-outline-primary" [class.active]="currentKind == 'all'">Todos</button>
 
-  <button (click)="filter(kind)" class="btn btn-outline-primary" [class.active]="currentKind == kind"
-    *ngFor="let kind of kinds">{{kind}}</button>
+  <button (click)="filter(kind)" class="btn btn-outline-primary" [class.active]="currentKind.id == kind.id"
+    *ngFor="let kind of kinds">{{kind.name}}</button>
 </div>
 
 <div class="row d-flex align-items-stretch">

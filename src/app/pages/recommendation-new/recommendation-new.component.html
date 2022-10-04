@@ -8,12 +8,12 @@
   </div>
   <div class="mb-3">
     <label>Link da Imagem</label>
-    <input type="text" formControlName="imageUrl" placeholder="Digite o link da imagem" class="form-control">
+    <input type="text" formControlName="image_url" placeholder="Digite o link da imagem" class="form-control">
   </div>
   <div class="mb-3">
     <label>Categoria</label>
-    <select formControlName="category" type="text" class="form-control">
-      <option value="{{category}}" *ngFor="let category of categories">{{category}}</option>
+    <select formControlName="category_id" type="text" class="form-control">
+      <option value="{{category.id}}" *ngFor="let category of categories">{{category.name}}</option>
     </select>
   </div>
   <div class="mb-3">

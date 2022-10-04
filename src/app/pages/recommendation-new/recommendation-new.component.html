@@ -1,0 +1,27 @@
+<a role="button" [routerLink]="['']">Voltar</a>
+<h1>Recommendation New</h1>
+
+<form [formGroup]="form">
+  <div class="mb-3">
+    <label>Nome</label>
+    <input type="text" formControlName="name" placeholder="Digite o nome da recomendação" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label>Link da Imagem</label>
+    <input type="text" formControlName="imageUrl" placeholder="Digite o link da imagem" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label>Categoria</label>
+    <select formControlName="category" type="text" class="form-control">
+      <option value="{{category}}" *ngFor="let category of categories">{{category}}</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label>Descrição</label>
+    <textarea formControlName="description" placeholder="Digite o nome da recomendação" class="form-control">
+    </textarea>
+  </div>
+  <button class="btn btn-primary" (click)="save()">Salvar</button>
+</form>
+<hr>
+<pre>{{form.value | json}}</pre>

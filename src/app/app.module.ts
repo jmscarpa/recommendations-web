@@ -11,6 +11,7 @@ import { DetailsComponent } from './pages/details/details.component';
 import { RecommendationItemComponent } from './components/recommendation-item/recommendation-item.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
+import { RecommendationNewComponent } from './pages/recommendation-new/recommendation-new.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LayoutComponent } from './pages/layout/layout.component';
     DetailsComponent,
     RecommendationItemComponent,
     LoginComponent,
-    LayoutComponent
+    RecommendationNewComponent,
+    LayoutComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

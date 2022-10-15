@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RecommendationModel } from '../../models/recommendation.model';
 import { CategoryModel } from '../../models/category.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { HttpClient } from '@angular/common/http';
-
-import { environment } from 'src/environments/environment';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private httpClient: HttpClient
+    private apiService: ApiService
   ) {}
 
   public readonly ALL_RECOMMENDATIONS: number = 0;
@@ -36,25 +34,16 @@ export class HomeComponent implements OnInit {
   }
 
   private loadRecommendations(categoryId: number): void {
-    const url = `${environment.apiUrl}/recommendations`;
-    const params: any = categoryId != this.ALL_RECOMMENDATIONS ? { category: categoryId } : {}
+    const params = categoryId != this.ALL_RECOMMENDATIONS ? { category: categoryId } : {}
     this.loading = true;
-    this.httpClient
-      .get<RecommendationModel[]>(url, { params })
-      .toPromise()
-      .then((data) => {
-        this.recommendations = data;
-        this.loading = false;
-      });
+
+    this.apiService.get<RecommendationModel[]>('recommendations', { params }).then((data) => {
+      this.recommendations = data;
+      this.loading = false;
+    });
   }
 
-  private loadCategories(): void {
-    const url = `${environment.apiUrl}/categories`;
-    this.httpClient
-      .get<CategoryModel[]>(url)
-      .toPromise()
-      .then((data) => {
-        this.categories = data;
-      });
+  private async loadCategories(): Promise<void> {
+    this.categories = await this.apiService.get<CategoryModel[]>('categories')
   }
 }

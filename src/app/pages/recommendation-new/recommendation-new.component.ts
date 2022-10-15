@@ -3,17 +3,16 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryModel } from '../../models/category.model';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { environment } from 'src/environments/environment';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-recommendation-new',
   templateUrl: './recommendation-new.component.html',
 })
 export class RecommendationNewComponent implements OnInit {
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   public categories: CategoryModel[] = [];
   public form: FormGroup = new FormGroup({
@@ -28,13 +27,9 @@ export class RecommendationNewComponent implements OnInit {
   }
 
   public save(): void {
-    const url = `${environment.apiUrl}/recommendations`;
 
     if (this.form.valid) {
-      this.httpClient
-        .post(url, this.form.value)
-        .toPromise()
-        .then((_) => {
+      this.apiService.post('recommendations', this.form.value).then((_) => {
           this.router.navigateByUrl('');
         })
         .catch((response) => {
@@ -45,13 +40,7 @@ export class RecommendationNewComponent implements OnInit {
     }
   }
 
-  private loadCategories(): void {
-    const url = `${environment.apiUrl}/categories`;
-    this.httpClient
-      .get<CategoryModel[]>(url)
-      .toPromise()
-      .then((data) => {
-        this.categories = data;
-      });
+  private async loadCategories(): Promise<void> {
+    this.categories = await this.apiService.get<CategoryModel[]>('categories');
   }
 }

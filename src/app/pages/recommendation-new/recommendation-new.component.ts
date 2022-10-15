@@ -6,6 +6,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-recommendation-new',
   templateUrl: './recommendation-new.component.html',
@@ -26,7 +28,7 @@ export class RecommendationNewComponent implements OnInit {
   }
 
   public save(): void {
-    const url = 'https://jp-recommendations-api.herokuapp.com/recommendations';
+    const url = `${environment.apiUrl}/recommendations`;
 
     if (this.form.valid) {
       this.httpClient
@@ -44,7 +46,7 @@ export class RecommendationNewComponent implements OnInit {
   }
 
   private loadCategories(): void {
-    const url = 'https://jp-recommendations-api.herokuapp.com/categories';
+    const url = `${environment.apiUrl}/categories`;
     this.httpClient
       .get<CategoryModel[]>(url)
       .toPromise()

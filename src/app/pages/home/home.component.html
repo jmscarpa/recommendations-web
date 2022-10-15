@@ -3,20 +3,24 @@
     <h1>Recomendações</h1>
     <span class="text-secondary">Usuário logado: {{currentUser}} </span>
   </div>
-  <a role="button" class="btn btn-secondary" [routerLink]="['recomendacoes/nova']">Adicionar Recomendação</a>
+  <a role="button" class="btn btn-primary" [routerLink]="['recomendacoes/nova']">Adicionar Recomendação</a>
 </div>
-
 <hr>
 
-<div class="btn-group w-100 mb-4" role="group">
-  <button (click)="filter('all')" class="btn btn-outline-primary" [class.active]="currentKind == 'all'">Todos</button>
+<strong class="d-block" *ngIf="loading">Carregando...</strong>
 
-  <button (click)="filter(kind)" class="btn btn-outline-primary" [class.active]="currentKind.id == kind.id"
-    *ngFor="let kind of kinds">{{kind.name}}</button>
-</div>
+<div *ngIf="!loading">
+  <div class="btn-group w-100 mb-4" role="group">
+    <button (click)="filter(ALL_RECOMMENDATIONS)" class="btn btn-outline-primary"
+      [class.active]="currentCategory == ALL_RECOMMENDATIONS">Todos</button>
 
-<div class="row d-flex align-items-stretch">
-  <div class="col-3 mb-4" *ngFor="let item of recommendations">
-    <app-recommendation-item [recommendation]='item'></app-recommendation-item>
+    <button (click)="filter(category.id)" class="btn btn-outline-primary"
+      [class.active]="currentCategory == category.id" *ngFor="let category of categories">{{category.name}}</button>
+  </div>
+
+  <div class="row d-flex align-items-stretch">
+    <div class="col-3 mb-4" *ngFor="let item of recommendations">
+      <app-recommendation-item [recommendation]='item'></app-recommendation-item>
+    </div>
   </div>
 </div>

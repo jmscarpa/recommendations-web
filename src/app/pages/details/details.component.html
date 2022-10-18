@@ -1,9 +1,17 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
   <a [routerLink]="['']" class="text-muted">Voltar</a>
-  <a role="button" class="btn btn-danger" (click)="destroy()">Apagar Recomendação</a>
+  <div>
+    <a role="button" class="btn btn-warning text-white me-3" (click)="showEdit()">Alterar</a>
+    <a role="button" class="btn btn-danger" (click)="destroy()">Apagar</a>
+  </div>
 </div>
 
 <strong class="d-block" *ngIf="loading">Carregando...</strong>
+
+<dialog class="rounded shadow" #editForm>
+  <h2>Alterar Recomendação</h2>
+  <app-recommendation-form [recommendationId]="recommendation.id"></app-recommendation-form>
+</dialog>
 
 <div *ngIf="!loading && recommendation">
   <div class="row">

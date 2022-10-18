@@ -13,6 +13,7 @@ import { RecommendationItemComponent } from './components/recommendation-item/re
 import { LoginComponent } from './pages/login/login.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { RecommendationNewComponent } from './pages/recommendation-new/recommendation-new.component';
+import { RecommendationFormComponent } from './components/recommendation-form/recommendation-form.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { RecommendationNewComponent } from './pages/recommendation-new/recommend
     LoginComponent,
     RecommendationNewComponent,
     LayoutComponent,
+    RecommendationFormComponent,
   ],
   imports: [
     BrowserModule,

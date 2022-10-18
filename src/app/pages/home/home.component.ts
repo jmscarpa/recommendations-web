@@ -25,19 +25,24 @@ export class HomeComponent implements OnInit {
   public currentUser: string = this.authService.currentUser;
   public loading: boolean = true;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadCategories();
     this.loadRecommendations(this.ALL_RECOMMENDATIONS);
   }
 
   public filter(categoryId: number): void {
     this.currentCategory = categoryId;
-    this.loadRecommendations(categoryId)
+    this.loadRecommendations(categoryId);
   }
 
   private loadRecommendations(categoryId: number): void {
     const url = `${environment.apiUrl}/recommendations`;
-    const params: any = categoryId != this.ALL_RECOMMENDATIONS ? { category: categoryId } : {}
+
+    let params: object = {};
+    if (categoryId != this.ALL_RECOMMENDATIONS) {
+      params = { category: categoryId };
+    }
+
     this.loading = true;
     this.httpClient
       .get<RecommendationModel[]>(url, { params })

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { RecommendationModel } from '../../models/recommendation.model';
@@ -15,19 +16,22 @@ import { environment } from 'src/environments/environment';
 export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private route: ActivatedRoute
   ) {}
 
   public readonly ALL_RECOMMENDATIONS: number = 0;
   public recommendations: RecommendationModel[] = [];
   public categories: CategoryModel[] = [];
-  public currentCategory: number = this.ALL_RECOMMENDATIONS;
+  public currentCategory: number =
+    Number(this.route.snapshot.queryParamMap.get('categoryId')) ||
+    this.ALL_RECOMMENDATIONS;
   public currentUser: string = this.authService.currentUser;
   public loading: boolean = true;
 
   public ngOnInit(): void {
     this.loadCategories();
-    this.loadRecommendations(this.ALL_RECOMMENDATIONS);
+    this.loadRecommendations(this.currentCategory);
   }
 
   public filter(categoryId: number): void {
@@ -45,7 +49,7 @@ export class HomeComponent implements OnInit {
 
     this.loading = true;
     this.httpClient
-      .get<RecommendationModel[]>(url, { params })
+      .get<RecommendationModel[]>(url, params)
       .toPromise()
       .then((data) => {
         this.recommendations = data;

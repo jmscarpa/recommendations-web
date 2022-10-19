@@ -1,4 +1,2 @@
-<a role="button" [routerLink]="['']">Voltar</a>
-<h1>Nova Recomendação</h1>
-
-<app-recommendation-form></app-recommendation-form>
+<a role="button" [routerLink]="['']" class="mb-3 d-block text-muted">Voltar</a>
+<app-recommendation-form (afterSave)="redirectToHome($event)"></app-recommendation-form>

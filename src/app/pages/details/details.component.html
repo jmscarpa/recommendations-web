@@ -8,9 +8,9 @@
 
 <strong class="d-block" *ngIf="loading">Carregando...</strong>
 
-<dialog class="rounded shadow" #editForm>
-  <h2>Alterar Recomendação</h2>
-  <app-recommendation-form [recommendationId]="recommendation.id"></app-recommendation-form>
+<dialog class="rounded p-0 shadow" #editForm *ngIf="!loading">
+  <app-recommendation-form [recommendation]="recommendation" (afterSave)="onAfterSave()">
+  </app-recommendation-form>
 </dialog>
 
 <div *ngIf="!loading && recommendation">

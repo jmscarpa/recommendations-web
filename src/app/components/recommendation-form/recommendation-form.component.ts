@@ -67,7 +67,11 @@ export class RecommendationFormComponent implements OnInit {
   }
 
   public cancel(): void {
-    document.querySelector('dialog')?.close();
+    if (this.isNew) {
+      this.router.navigateByUrl('');
+    } else {
+      document.querySelector('dialog')?.close();
+    }
   }
 
   private loadCategories(): void {

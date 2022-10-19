@@ -30,9 +30,9 @@
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-between">
-        <button class="btn btn-outline-secondary" (click)="cancel()">Cancelar</button>
-        <button class="btn btn-primary me-2" (click)="save()">Salvar</button>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-outline-secondary me-2 w-25" (click)="cancel()">Cancelar</button>
+        <button class="btn btn-dark me-2 w-25" (click)="save()">{{isNew ? "Salvar" : "Atualizar"}}</button>
       </div>
     </form>
   </div>

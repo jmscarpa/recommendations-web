@@ -1,27 +1,59 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <a [routerLink]="['']" class="text-muted">Voltar</a>
-  <div>
-    <a role="button" class="btn btn-warning text-white me-3" (click)="showEdit()">Alterar</a>
-    <a role="button" class="btn btn-danger" (click)="destroy()">Apagar</a>
-  </div>
-</div>
+<div class="container">
+  <strong class="d-block" *ngIf="loading">Carregando...</strong>
 
-<strong class="d-block" *ngIf="loading">Carregando...</strong>
+  <a [routerLink]="['']" class="text-muted mb-4 d-block">Voltar</a>
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex justify-content-end align-items-center">
+
+        <div>
+          <a role="button" class="btn btn-warning text-white me-3" (click)="showEdit()">Alterar</a>
+          <a role="button" class="btn btn-danger" (click)="destroy()">Apagar</a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body p-4">
+      <div *ngIf="!loading && recommendation">
+        <div class="row">
+          <div class="col-2">
+            <img [src]="recommendation.image_url" class="card-img-top rounded shadow">
+          </div>
+          <div class="col-8">
+            <h1 class="mb-3">{{recommendation.name}}</h1>
+            <div class="badge rounded-pill text-bg-dark mb-2">{{recommendation.category.name}}</div>
+            <p class="card-text">{{recommendation.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex align-items-center" *ngFor="let comment of comments">
+        <img [src]="comment.user.picture_url" class="comment-avatar me-2">
+        <div>
+          <small class="text-muted small">Publicado por {{comment.user.name}} em {{comment.created_at |
+            date:'short'}}</small>
+          <p class="mb-0">{{comment.content}}</p>
+        </div>
+      </li>
+    </ul>
+    <div class="card-footer">
+      <form [formGroup]="form">
+        <div class="row">
+          <div class="col-12 col-md-10">
+            <input type="text" class="form-control" placeholder="Deixe seu comentário" formControlName="content">
+          </div>
+          <div class="col-12 col-md-2">
+            <button class="btn btn-dark w-100" (click)="saveComment()">Enviar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+</div>
 
 <dialog class="rounded p-0 shadow" #editForm *ngIf="!loading">
   <app-recommendation-form [recommendation]="recommendation" (afterSave)="onAfterSave()">
   </app-recommendation-form>
 </dialog>
-
-<div *ngIf="!loading && recommendation">
-  <div class="row">
-    <div class="col-2">
-      <img [src]="recommendation.image_url" class="card-img-top rounded shadow">
-    </div>
-    <div class="col-8">
-      <h1 class="my-3">{{recommendation.name}}</h1>
-      <div class="badge rounded-pill text-bg-dark mb-2">{{recommendation.category.name}}</div>
-      <p class="card-text">{{recommendation.description }}</p>
-    </div>
-  </div>
-</div>

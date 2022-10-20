@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryModel } from '../../models/category.model';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-recommendation-form',
@@ -15,7 +15,7 @@ export class RecommendationFormComponent implements OnInit {
   @Input() recommendation?: RecommendationModel;
   @Output() public afterSave: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   public form: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -29,6 +29,7 @@ export class RecommendationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
+
     if (this.recommendation) {
       this.id = this.recommendation.id;
       this.isNew = false;
@@ -47,15 +48,14 @@ export class RecommendationFormComponent implements OnInit {
 
   public save(): void {
     const url = this.isNew
-      ? `${environment.apiUrl}/recommendations`
-      : `${environment.apiUrl}/recommendations/${this.recommendation?.id}`;
+      ? `recommendations`
+      : `recommendations/${this.recommendation?.id}`;
 
     const method = this.isNew ? 'post' : 'patch';
 
     if (this.form.valid) {
-      this.httpClient[method](url, this.form.value)
-        .toPromise()
-        .then((_) => {
+      this.apiService[method](url, this.form.value)
+        .then(() => {
           this.afterSave.emit(this.form.value.category_id);
         })
         .catch((response) => {
@@ -75,12 +75,8 @@ export class RecommendationFormComponent implements OnInit {
   }
 
   private loadCategories(): void {
-    const url = `${environment.apiUrl}/categories`;
-    this.httpClient
-      .get<CategoryModel[]>(url)
-      .toPromise()
-      .then((data) => {
-        this.categories = data;
-      });
+    this.apiService.get<CategoryModel[]>('categories').then((data) => {
+      this.categories = data;
+    });
   }
 }

@@ -4,9 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { RecommendationModel } from '../../models/recommendation.model';
 import { CategoryModel } from '../../models/category.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
-
-import { environment } from 'src/environments/environment';
+import { ApiService } from 'src/app/services/api.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -16,15 +15,14 @@ import { environment } from 'src/environments/environment';
 export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private httpClient: HttpClient,
-    private route: ActivatedRoute
+    private apiService: ApiService
   ) {}
 
   public readonly ALL_RECOMMENDATIONS: number = 0;
   public recommendations: RecommendationModel[] = [];
   public categories: CategoryModel[] = [];
   public currentCategory: number = this.ALL_RECOMMENDATIONS;
-  public currentUser: string = this.authService.currentUser;
+  public currentUser: UserModel = this.authService.currentUser;
   public loading: boolean = true;
 
   public ngOnInit(): void {
@@ -38,19 +36,15 @@ export class HomeComponent implements OnInit {
   }
 
   private loadRecommendations(categoryId: number): void {
-    const url = `${environment.apiUrl}/recommendations`;
+    this.loading = true;
 
     let params = {};
     if (categoryId != this.ALL_RECOMMENDATIONS) {
       params = { category: categoryId };
     }
 
-    this.loading = true;
-    this.httpClient
-      .get<RecommendationModel[]>(url, {
-        params: new HttpParams({ fromObject: params }),
-      })
-      .toPromise()
+    this.apiService
+      .get<RecommendationModel[]>('recommendations', params)
       .then((data) => {
         this.recommendations = data;
         this.loading = false;
@@ -58,12 +52,8 @@ export class HomeComponent implements OnInit {
   }
 
   private loadCategories(): void {
-    const url = `${environment.apiUrl}/categories`;
-    this.httpClient
-      .get<CategoryModel[]>(url)
-      .toPromise()
-      .then((data) => {
-        this.categories = data;
-      });
+    this.apiService.get<CategoryModel[]>('categories').then((data) => {
+      this.categories = data;
+    });
   }
 }

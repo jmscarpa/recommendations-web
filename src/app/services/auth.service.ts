@@ -12,7 +12,7 @@ export class AuthService {
     return !!localStorage.user;
   }
 
-  public get currentUser(): string {
+  public get currentUser(): UserModel {
     return JSON.parse(localStorage.user);
   }
 
